@@ -4,10 +4,13 @@ from PIL import Image
 
 def rotacion(img, theta=np.pi/4):
     """
-    Rota una imagen en torno a las manecillas del reloj, considerando 
-    un ángulo ingresado, thetha
+    Rota una imagen en torno a las manecillas del reloj, considerando
+    un ángulo ingresado, thetha en radianes
+    Parametros:
+    : img : Imagen
+    : theta : angulo de giro en radianes
     """
-
+    # Se asegura que la imagen esté en escala de grises
     img = img.convert('L')
 
     A = np.array(img, dtype=np.uint8)
