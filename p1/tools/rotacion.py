@@ -2,38 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 
-
-def traslacion(img, delta_x=50, delta_y=50):
-    """
-    La traslación mueve los píxeles de una imagen en los ejes 'x' y 'y'
-    mediante un delta_x y un delta_y
-    """
-
-    m, n = img.size
-    img = img.resize((int(m * 0.5), int(n * 0.5)))
-    m, n = img.size
-    img = img.convert('L')  # Convierte la imagen a escala de grises
-
-    A = np.array(img)  # Conversion de imagen a array
-    B = np.zeros((m, n), dtype=np.uint8)
-
-    # Traslación
-
-    for x in range(m):
-        for y in range(n):
-            x_t = x + delta_x
-            y_t = y + delta_y
-
-            if x_t < m and y_t < n:
-                B[x_t][y_t] = np.uint8(A[x, y])
-
-    # Conversion del array de salida en un imagen en
-    # escala de grises.
-    B = Image.fromarray(B, 'L')
-
-    return B
-
-
 def rotacion(img, theta=np.pi/4):
     """
     Rota una imagen en torno a las manecillas del reloj, considerando 

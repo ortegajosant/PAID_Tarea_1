@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 
 
-def filtro_mediana(img):
+def mediana(img, black_p=False):
     """
        Aplicación del filtro de la mediana para las imágenes que se ven
        con ruido tras la aplicación de una rotación
@@ -12,9 +12,16 @@ def filtro_mediana(img):
 
     A = np.array(img, dtype=np.uint8)
 
-    for x in range(m):
-        for y in range(n):
-            if A[x, y] == np.uint8(0):
+    if black_p:
+        for x in range(m):
+            for y in range(n):
+                if A[x, y] == np.uint8(0):
+                    kernel_array = np.squeeze(np.asarray(A[x-1:x+2, y-1:y+2]))
+                    A[x, y] = np.uint8(np.median(kernel_array))
+
+    else:
+        for x in range(m):
+            for y in range(n):
                 kernel_array = np.squeeze(np.asarray(A[x-1:x+2, y-1:y+2]))
                 A[x, y] = np.uint8(np.median(kernel_array))
 
