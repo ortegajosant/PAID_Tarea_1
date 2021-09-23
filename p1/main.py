@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 import sys
-from tools.rotacion import rotacion
 import filtros.mediana as f_mediana
 import filtros.media as f_media
 from parte1_p1 import media
