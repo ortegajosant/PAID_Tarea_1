@@ -8,7 +8,7 @@ from filtros.media import media
 
 
 def rotar(img, grado):
-    img_s = None
+    img_rotada = None
     if (grado != False and isinstance(grado, int)):
         grado = grado * np.pi/180
         img_rotada = rotacion(img, grado)
@@ -16,19 +16,24 @@ def rotar(img, grado):
         img_rotada = rotacion(img)
 
     img_mediana = mediana(img_rotada, True)
-
+    img_media = media(img_rotada, True)
+    
     grafico = plt.figure()
-    grafico.add_subplot(1, 3, 1)
+    grafico.add_subplot(2, 2, 1)
     plt.imshow(img, cmap='gray')
     plt.title("Imagen original")
 
-    grafico.add_subplot(1, 3, 2)
+    grafico.add_subplot(2, 2, 2)
     plt.imshow(img_rotada, cmap='gray')
     plt.title("Imagen con rotacion")
 
-    grafico.add_subplot(1, 3, 3)
+    grafico.add_subplot(2, 2, 3)
     plt.imshow(img_mediana, cmap='gray')
     plt.title("Imagen con filtro de mediana")
+
+    grafico.add_subplot(2, 2, 4)
+    plt.imshow(img_media, cmap='gray')
+    plt.title("Imagen con filtro de media")
 
     plt.show()
 
@@ -114,7 +119,7 @@ if __name__ == "__main__":
 
         - Rotacion:
             Parámetros:
-            : rotacion : compara el filtrado para una imagen aplicando el filtro
+            : rotacion : rota una imagen y compara el filtrado aplicando el filtro
                 de la media y la mediana
             : img     : indica el path de la imagen a utilizar
             : grados  : indica el angulo de giro a utilizar para realizar la rotación
