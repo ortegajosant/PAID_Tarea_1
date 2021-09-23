@@ -2,40 +2,25 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 import sys
-from tools.rotacion import rotacion
-from filtros.mediana import mediana
-from filtros.media import media
+import filtros.mediana as f_mediana
+import filtros.media as f_media
+from parte1_p1 import media
+from parte1_p2 import mediana
+from parte1_p3 import rotacion
 
 
 def rotar(img, grado):
-    img_s = None
+    img_rotada = None
     if (grado != False and isinstance(grado, int)):
         grado = grado * np.pi/180
-        img_rotada = rotacion(img, grado)
+        rotacion(img, grado)
     else:
-        img_rotada = rotacion(img)
-
-    img_mediana = mediana(img_rotada, True)
-
-    grafico = plt.figure()
-    grafico.add_subplot(1, 3, 1)
-    plt.imshow(img, cmap='gray')
-    plt.title("Imagen original")
-
-    grafico.add_subplot(1, 3, 2)
-    plt.imshow(img_rotada, cmap='gray')
-    plt.title("Imagen con rotacion")
-
-    grafico.add_subplot(1, 3, 3)
-    plt.imshow(img_mediana, cmap='gray')
-    plt.title("Imagen con filtro de mediana")
-
-    plt.show()
+        rotacion(img)
 
 
-def comparar(img, puntos):
-    img_media = media(img, puntos)
-    img_mediana = mediana(img, puntos)
+def comparar(img):
+    img_media = f_media.media(img, False)
+    img_mediana = f_mediana.mediana(img, False)
     
     grafico = plt.figure()
     
@@ -54,25 +39,12 @@ def comparar(img, puntos):
     plt.show()
 
 
-def filtrar(tipo, img, puntos):
+def filtrar(tipo, img):
     img_filtrada = None
     if tipo == 'mediana':
-        img_filtrada = mediana(img, puntos)
+        mediana(img)
     else:
-        img_filtrada = media(img, puntos)
-
-    # img_s = rt.rotacion(img)  # Rotacion de imagen
-    grafico = plt.figure()
-
-    grafico.add_subplot(1, 2, 1)
-    plt.imshow(img, cmap='gray')
-    plt.title("Imagen original")
-
-    grafico.add_subplot(1, 2, 2)
-    plt.imshow(img_filtrada, cmap='gray')
-    plt.title("Imagen con " + tipo)
-
-    plt.show()
+        media(img)
 
 
 if __name__ == "__main__":
@@ -82,9 +54,6 @@ if __name__ == "__main__":
             Parámetros:
             : media   : indica que se realiza el filtro de la media
             : img     : indica el path de la imagen a utilizar
-            : negros  : indica si se realiza el filtro para toda la imagen 
-                o sólo los pixeles negros t / f. Si no se especifica, se aplica a
-                toda la imagen
             Ejemplo:
                 python3 main.py media img/img.jpg t # Se aplica sólo a los negros
                 python3 main.py media img/img.jpg   # Se aplica a toda la imagen
@@ -93,9 +62,6 @@ if __name__ == "__main__":
              Parámetros:
             : mediana : indica que se realiza el filtro de la mediana
             : img     : indica el path de la imagen a utilizar
-            : negros  : indica si se realiza el filtro para toda la imagen  
-                o sólo los pixeles negros t / f. Si no se especifica, se aplica a
-                toda la imagen
             Ejemplo:
                 python3 main.py media img/img.jpg t # Se aplica sólo a los negros
                 python3 main.py media img/img.jpg   # Se aplica a toda la imagen
@@ -105,16 +71,13 @@ if __name__ == "__main__":
             : compara : compara el filtrado para una imagen aplicando el filtro
                 de la media y la mediana
             : img     : indica el path de la imagen a utilizar
-            : negros  : indica si se realiza el filtro para toda la imagen 
-                o sólo los pixeles negros t / f. Si no se especifica, se aplica a
-                toda la imagen
             Ejemplo:
                 python3 main.py media img/img.jpg t # Se aplica sólo a los negros
                 python3 main.py media img/img.jpg   # Se aplica a toda la imagen
 
         - Rotacion:
             Parámetros:
-            : rotacion : compara el filtrado para una imagen aplicando el filtro
+            : rotacion : rota una imagen y compara el filtrado aplicando el filtro
                 de la media y la mediana
             : img     : indica el path de la imagen a utilizar
             : grados  : indica el angulo de giro a utilizar para realizar la rotación
@@ -140,19 +103,14 @@ if __name__ == "__main__":
 
     img = Image.open(img_path, 'r')
     if (arg_3 != False):
-        if arg_3 == 't':
-            arg_3 = True
-        elif arg_3 == 'f':
-            arg_3 = False
-        else:
-            try:
-                arg_3 = int(arg_3)
-            except:
-                print('Invald cast type to int for degrees')
+        try:
+            arg_3 = int(arg_3)
+        except:
+            print('Invald cast type to int for degrees')
 
     if function == 'media' or function == 'mediana':
-        filtrar(function, img, arg_3)
+        filtrar(function, img)
     elif function == 'comparar':
-        comparar(img, arg_3)
+        comparar(img)
     elif function == 'rotacion':
         rotar(img, arg_3)

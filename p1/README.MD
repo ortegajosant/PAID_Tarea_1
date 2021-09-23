@@ -23,14 +23,8 @@ este main, seguir las siguientes instrucciones.
     
     `: img     :` indica el path de la imagen a utilizar
     
-    `: negros  :` indica si se realiza el filtro para toda la imagen 
-        o sólo los pixeles negros t / f. Si no se especifica, se aplica a
-        toda la imagen
-    
     Ejemplo:
     
-    `python3 main.py media img/img.jpg t` # Se aplica sólo a los negros
-
     `python3 main.py media img/img.jpg`   # Se aplica a toda la imagen
 
 - **Filtro de la mediana**:
@@ -41,13 +35,7 @@ este main, seguir las siguientes instrucciones.
     
     `: img     :` indica el path de la imagen a utilizar  
     
-    `: negros  :` indica si se realiza el filtro para toda la imagen  
-        o sólo los pixeles negros t / f. Si no se especifica, se aplica a
-        toda la imagen
-    
     Ejemplo:
-    
-    `python3 main.py media img/img.jpg t` # Se aplica sólo a los negros
 
     `python3 main.py media img/img.jpg  ` # Se aplica a toda la imagen
 
@@ -60,13 +48,7 @@ este main, seguir las siguientes instrucciones.
     
     `: img     :` indica el path de la imagen a utilizar
     
-    `: negros  :` indica si se realiza el filtro para toda la imagen 
-        o sólo los pixeles negros t / f. Si no se especifica, se aplica a
-        toda la imagen
-    
     Ejemplo:
-    
-    `python3 main.py media img/img.jpg t` # Se aplica sólo a los negros
     
     `python3 main.py media img/img.jpg  ` # Se aplica a toda la imagen
 
